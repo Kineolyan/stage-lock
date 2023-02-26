@@ -14,7 +14,7 @@ class TestStagedLock {
 
     @Test
     void testCreation() {
-        val lock = StagedLock.create(Map.of("a", LockStrategy.PASSTHROUGH, "b", LockStrategy.EXCLUSIVE));
+        val lock = StagedLock.create(Map.of("a", LockStrategy.PASSTHROUGH, "b", LockStrategy.PASSTHROUGH));
         val aLock = lock.getLock("a");
         val bLock = lock.getLock("b");
         val bLocked = bLock.tryLock();
