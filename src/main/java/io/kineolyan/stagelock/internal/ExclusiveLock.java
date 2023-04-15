@@ -45,6 +45,10 @@ public final class ExclusiveLock implements Lock {
         }
     }
 
+    private void incrementCounter() {
+        throw new UnsupportedOperationException("todo");
+    }
+
     @Override
     public boolean tryLock(final long time, final TimeUnit unit) throws InterruptedException {
         synchronized (this.lock) {

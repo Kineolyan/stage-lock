@@ -46,12 +46,12 @@
             <version>${lombok.version}</version>
             <scope>provided</scope>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>io.kineolyan</groupId>-->
-<!--            <artifactId>jrepl</artifactId>-->
-<!--            <version>1.0-SNAPSHOT</version>-->
-<!--            <scope>test</scope>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>io.gitlab.kineolyan</groupId>
+            <artifactId>jrepl</artifactId>
+            <version>1.0.0-alpha</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
