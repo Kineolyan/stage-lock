@@ -44,4 +44,19 @@ public class StageGate<StageT> {
         }
     }
 
+    public GateTaker bindToStage(final StageT stage) {
+        return new GateTaker() {
+            @Override
+            public boolean tryAcquireInterruptibly(Duration timeout) throws InterruptedException {
+                return StageGate.this.acquire(stage, timeout);
+            }
+
+            @Override
+            public void release() {
+                StageGate.this.release(stage);
+
+            }
+        };
+    }
+
 }

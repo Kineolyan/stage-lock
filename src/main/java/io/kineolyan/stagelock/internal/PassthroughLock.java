@@ -14,7 +14,6 @@ public final class PassthroughLock implements Lock {
 
     private final AtomicInteger counter = new AtomicInteger(0);
     private final GateTaker lockStage;
-    private final Runnable unlockStage;
 
     private final Object lock = new Object();
 
@@ -79,7 +78,7 @@ public final class PassthroughLock implements Lock {
                 }
             });
             if (remaining == 0) {
-                this.unlockStage.run();
+                this.lockStage.release();
             }
         }
     }

@@ -4,7 +4,6 @@ import lombok.val;
 
 import java.time.Duration;
 
-@FunctionalInterface
 public interface GateTaker {
 
     boolean tryAcquireInterruptibly(Duration timeout) throws InterruptedException;
@@ -26,5 +25,7 @@ public interface GateTaker {
         val result = tryAcquireInterruptibly(null);
         assert result : "Not acquired";
     }
+
+    void release();
 
 }

@@ -1,5 +1,6 @@
 package io.kineolyan.stagelock;
 
+import io.kineolyan.stagelock.internal.ExclusiveLock;
 import io.kineolyan.stagelock.internal.PassthroughLock;
 import io.kineolyan.stagelock.internal.StageGate;
 import lombok.AccessLevel;
@@ -39,16 +40,12 @@ public final class StagedLock<StageT> {
                                 Map.Entry::getKey,
                                 entry -> {
                                     val stage = entry.getKey();
-                                    switch (entry.getValue()) {
-                                        case PASSTHROUGH:
-                                            return new PassthroughLock(
-                                                    timeout -> gate.acquire(stage, timeout),
-                                                    () -> gate.release(stage));
-                                        case EXCLUSIVE:
-                                            throw new UnsupportedOperationException("todo");
-                                        default:
-                                            throw new IllegalStateException("unreachable");
-                                    }
+                                    return switch (entry.getValue()) {
+                                        case PASSTHROUGH -> new PassthroughLock(
+                                                gate.bindToStage(stage));
+                                        case EXCLUSIVE -> new ExclusiveLock(
+                                                gate.bindToStage(stage));
+                                    };
                                 }),
                         mapFinalizer
                 )));
