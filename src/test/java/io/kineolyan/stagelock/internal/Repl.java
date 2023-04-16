@@ -9,7 +9,10 @@ import java.util.List;
 class Repl {
 
     public static void main(String[] args) {
-        ReplServer.main(args);
+        var effectiveArgs = args.length == 0
+                ? new String[] {"7777"}
+                : args;
+        ReplServer.main(effectiveArgs);
     }
 
     @ReplCode
